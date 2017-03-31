@@ -1,0 +1,51 @@
+<div class="modal fade modal-wide" id="NOVOMODAL" tabindex="-1"
+	role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+
+				<span class="modal-title" id="myModalLabel" style="font-size: 15px">
+					Cadastrar &nbsp; <span> <a href=""
+						ng-click="criarObjeto(_novo)"
+						data-dismiss="modal" title="Criar"> <span
+							class="glyphicon glyphicon-floppy-saved"> </span>
+					</a>
+					</span>
+				</span>
+			</div>
+
+			<div class="modal-body" style="font-size: 10px">
+				<div>
+					<table class="table table-striped"
+						style="margin-top: 15px; font-size: 10px">
+						<tr>
+							<td style="width: 80px"><b>Descrição</b></td>
+							<td style="width: 300px"><input type="text"
+								ng-model="_novo.descricao" /></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td><b>Servidor de aplicação</b></td>
+							<td>
+								<select>
+									<option default></option>
+									<option ng-repeat="server in sas" ng-click="_novo.server = server">
+										{{ server.descricao }}
+									</option>
+								</select>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+			</div>
+		</div>
+	</div>
+</div>

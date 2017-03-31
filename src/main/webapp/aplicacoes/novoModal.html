@@ -1,0 +1,96 @@
+<div class="modal fade modal-wide" id="NOVOMODAL" tabindex="-1"
+	role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+
+				<span class="modal-title" id="myModalLabel" style="font-size: 15px">
+					Cadastrar &nbsp; <span> <a href=""
+						ng-click="criarAplicacao(_novo)"
+						data-dismiss="modal" title="Criar"> <span
+							class="glyphicon glyphicon-floppy-saved"> </span>
+					</a>
+					</span>
+				</span>
+			</div>
+
+			<div class="modal-body" style="font-size: 10px">
+				<div>
+					<table class="table table-striped"
+						style="margin-top: 15px; font-size: 10px">
+						<tr>
+							<td style="width: 80px"><b>Descrição</b></td>
+							<td style="width: 300px"><input type="text"
+								ng-model="_novo.descricao" /></td>
+							<td></td>
+						</tr>
+						
+						<tr>
+							<td style="width: 80px"><b>Ambiente</b></td>
+							<td style="width: 300px"><input type="text"
+								ng-model="_novo.ambiente" /></td>
+							<td></td>
+						</tr>
+						
+						<tr>
+							<td><b>Arquivo</b></td>
+							<td><input type="text" ng-model="_novo.arquivo" />
+							</td>
+							<td></td>
+						</tr>
+					
+						<tr>
+							<td><b>E-mails</b></td>
+							<td>
+								<input type="text" ng-model="novoEmail" /> 
+								&nbsp; 
+								<a href="" ng-click="_novo.emails.push(novoEmail); novoEmail=''" title="Adicionar e-mail"> 
+									<span class="glyphicon glyphicon-plus"></span>
+								</a>
+								
+								<p ng-repeat="email in _novo.emails" style="padding-top: 10px; padding-left: 5px">
+									{{ email }} 
+									&nbsp; 
+									<a href="" ng-click="removerDoArray(_novo.emails, email)"> 
+										<span class="glyphicon glyphicon-minus"></span>
+									</a> 
+								</p>
+							</td>
+							<td>
+							</td>
+						</tr>
+						<tr>
+							<td><b>Targets</b></td>
+							<td>
+								<select>
+									<option ng-repeat="target in targets" ng-hide="verificarNoArrayPorID(_novo.target, target.id)"
+										ng-click="_novo.target.push(target)">
+										{{ target.descricao }} - {{ target.server.descricao }}
+									</option>
+								</select>
+								
+								<p ng-repeat="target in _novo.target" style="padding-top: 10px; padding-left: 5px">
+									{{ target.descricao }} - {{ target.server.descricao }} 
+									&nbsp; 
+									<a href="" ng-click="removerNoArrayPorID(_novo.target, target.id)">
+										<span class="glyphicon glyphicon-minus"></span>
+									</a>
+								</p>
+							</td>
+							<td>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+			</div>
+		</div>
+	</div>
+</div>

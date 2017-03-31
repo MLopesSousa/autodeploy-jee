@@ -1,0 +1,70 @@
+<div class="modal fade modal-wide" id="INFO" tabindex="-1"
+	role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				
+				<span class="modal-title" id="myModalLabel" style="font-size: 15px">
+					{{ objetoSelecionado.descricao }}
+				<span>
+			</div>
+
+			<div class="modal-body" style="font-size: 10px">
+				<table class="table table-striped" style="margin-top: 15px; font-size: 10px">
+					<tr>
+						<td style="font-size: 10px; padding-left: 0px" colspan="5">
+							<b> DESCRIÇÃO </b> &nbsp; {{ objetoSelecionado.descricao }}
+						</td>
+					</tr>
+					<tr>
+						<td style="font-size: 10px; padding-left: 0px" colspan="5">
+							<b> HOST </b> &nbsp; {{ objetoSelecionado.host }}
+						</td>
+					</tr>
+					<tr>
+						<td style="font-size: 10px; padding-left: 0px" colspan="5">
+							<b> PORTA </b> &nbsp; {{ objetoSelecionado.porta }}
+						</td>
+					</tr>
+					
+					<tr>
+						<td style="font-size: 10px; padding-left: 0px" colspan="5">
+							<b> SSH USU�RIO </b> &nbsp; {{ objetoSelecionado.sshUsuario }}
+						</td>
+					</tr>
+					
+					<tr ng-show="exibirBotao('Admin')">
+						<td style="font-size: 10px; padding-left: 0px" colspan="5">
+							<b> COMANDO </b> &nbsp; {{ objetoSelecionado.comando }}
+						</td>
+					</tr>
+					<tr>
+						<td style="font-size: 10px; padding-left: 0px" colspan="5">
+							<b> FILA </b> &nbsp;  {{ objetoSelecionado.fila }} 
+						</td>
+					</tr>
+					<tr>
+						<td style="font-size: 10px; padding-left: 0px" colspan="5">
+							<b> ALIAS </b> &nbsp; <span title="String kibana" style="color: green;"> {{ objetoSelecionado.alias }} </span>
+						</td>
+					</tr>
+					
+					<tr>
+						<td style="font-size: 10px; padding-left: 0px" colspan="5">
+							<b> ESTADO </b> &nbsp;  <span ng-bind-html="objetoSelecionado.estado | filtroEstado"></span> 
+						</td>
+					</tr>
+					
+				</table>
+			</div>
+
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+			</div>
+		</div>
+	</div>
+</div>

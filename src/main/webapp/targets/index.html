@@ -1,0 +1,79 @@
+<!--  modal do novo -->
+<div ng-include='"targets/novoModal.html"'></div>
+<!-- fim do modal no novo -->
+
+<!--  modal editar -->
+<div ng-include='"targets/editar.html"'></div>
+<!-- fim modal editar -->
+
+<!--  info editar -->
+<div ng-include='"targets/info.html"'></div>
+<!-- fim info editar -->
+
+<div style="padding-bottom: 15px">
+	<div class="input-group input-group-sm">
+		<div class="input-group-btn">
+			<button type="button" class="btn btn-default dropdown-toggle"
+				data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				Menu <span class="caret"></span>
+			</button>
+			<ul class="dropdown-menu" style="font-size: 12px">
+				<li><a href="#/aplicacoes">Aplicações</a></li>
+				<li><a href="#/deploys">Deploys</a></li>
+				<li ng-show="exibirBotao('Admin')"><a href="#/painel">Painel</a></li>
+				<li><a href="#/sas">Servidores de aplicação</a></li>
+			</ul>
+		</div>
+		<input type="text" class="form-control" placeholder="Procurar"
+			aria-describedby="sizing-addon1" ng-model="search">
+	</div>
+</div>
+
+<div>
+	<center>
+		<img ng-if="targets.length === 0"
+			src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+	</center>
+
+	<table ng-if="targets.length > 0" class="table table-bordered">
+		<thead>
+			<tr>
+				<th style="width: 29px;"></th>
+				<th style="width: 300px">Target &nbsp; <a href=""
+					ng-show="exibirBotao('Admin')" ng-click="_novo = criar()"
+					data-toggle="modal" data-target="#NOVOMODAL" title="Novo target">
+						<span class="glyphicon glyphicon-plus-sign"> </span>
+				</a>
+				</th>
+				<th style="width: 400px">Servidor de aplicação</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody
+			ng-repeat="target in targets | filter: search | orderBy: 'descricao' ">
+			<tr>
+				<td style="padding-right: 1px"><a href="" data-toggle="modal"
+					data-target="#INFO" ng-click="selecionaObjeto(target)"
+					title="Detalhes do target"> <span
+						class="glyphicon glyphicon-plus"> </span>
+				</a></td>
+				<td>{{ target.descricao }}</td>
+				<td>{{ target.server.descricao }}</td>
+				<td><a ng-show="exibirBotao('Admin')" href=""
+					ng-click="remover(target.id)" title="Remover target"> <span
+						class="glyphicon glyphicon-trash"> </span>
+				</a> &nbsp; <a ng-show="exibirBotao('Admin')" href=""
+					ng-click="selecionaEditar(target)" data-toggle="modal"
+					data-target="#EDITAR" title="Editar target"> <span
+						class="glyphicon glyphicon-edit"></span>
+				</a> &nbsp; <a ng-show="exibirBotao('Admin')" href=""
+					ng-click="clonarObjeto(target)" data-toggle="modal"
+					data-target="#NOVOMODAL" title="Clonar target"> <span
+						class="glyphicon glyphicon-duplicate"></span>
+				</a></td>
+			</tr>
+
+
+		</tbody>
+	</table>
+</div>

@@ -1,0 +1,68 @@
+<div class="modal fade modal-wide" id="DEPLOYS" tabindex="-1"
+	role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<div style="font-size: 10px; padding-left: 0px">LISTA DE
+					DEPLOYS</div>
+			</div>
+
+			<div class="modal-body" style="font-size: 10px">
+				<div colspan="5"
+					ng-repeat="deploy in aplicacaoSelecionada.deploys | orderBy: '-timestamp'">
+					<ul style="list-style-type: none;">
+						<li style="display: inline"><a style="padding-right: 1px"
+							href="" ng-click="espandirLinha(deploy.id)"> <span
+								ng-hide="estaLinhaEstaEspandida(deploy.id)"
+								class="glyphicon glyphicon-plus"></span> <span
+								ng-show="estaLinhaEstaEspandida(deploy.id)"
+								class="glyphicon glyphicon-minus"></span>
+						</a> &nbsp; <b>TIMESTAMP</b> {{ deploy.timestamp | date: 'MMM d, y H:mm:ss' : '+300' }}</li>
+						<li style="display: inline; width: 200px">&nbsp; <b>TARGET</b>
+							{{ deploy.target.descricao }}
+						</li>
+						<li style="display: inline; width: 200px">&nbsp; <b>
+								ARQUIVO </b> {{ deploy.arquivo }} &nbsp; <a
+							href="rs/deploys/{{ deploy.id }}/arquivo"
+							title="Download do arquivo"> <span
+								class="glyphicon glyphicon-download-alt"></span>
+						</a></li>
+						<li style="display: inline; width: 200px">&nbsp; <span
+							ng-bind-html="deploy.estado | filtroEstado"></span></li>
+						<li style="display: inline; width: 200px">&nbsp; <a href=""
+							ng-click="redeploy(deploy.id)"> <span title="Redeploy"
+								class="glyphicon glyphicon-refresh"></span>
+						</a>
+						</li>
+					</ul>
+					<!-- detalhes -->
+					<div ng-show="estaLinhaEstaEspandida(deploy.id)"
+						style="padding-top: 10px; padding-bottom: 15px">
+						
+						<p style="padding-left: 40px" ng-show="exibirBotao('Admin')">
+						&nbsp; <b> Comando executado: </b> &nbsp; <a
+							href="rs/deploys/{{ deploy.id }}/script" target="_blank_">
+							rs/deploys/{{ deploy.id }}/script </a>
+						</p>
+						
+						<p style="padding-left: 40px"
+							ng-repeat="evento in deploy.eventos | orderBy:'id' ">
+							&nbsp; {{ evento.timestamp | date: 'MMM d, y H:mm:ss' : '+300' }}
+							&nbsp; <span
+								ng-bind-html="evento.descricao.toUpperCase() | verificaFalhaOuSucessoNaString">
+							</span>
+						</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+			</div>
+		</div>
+	</div>
+</div>

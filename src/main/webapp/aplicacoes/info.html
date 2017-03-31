@@ -1,0 +1,70 @@
+<div class="modal fade modal-wide" id="INFO" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+
+				<span class="modal-title" id="myModalLabel" style="font-size: 15px">
+					{{ aplicacaoSelecionada.descricao }} <span>
+			</div>
+
+			<div class="modal-body" style="font-size: 10px">
+				<table class="table table-striped"
+					style="margin-top: 15px; font-size: 10px">
+					<tr>
+						<td style="font-size: 10px; padding-left: 0px" colspan="5"><b>
+								DESCRIÇÃO </b> &nbsp; {{ aplicacaoSelecionada.descricao }}</td>
+					</tr>
+					<tr>
+						<td style="font-size: 10px; padding-left: 0px" colspan="5"><b>
+								AMBIENTE </b> &nbsp; {{ aplicacaoSelecionada.ambiente }}</td>
+					</tr>
+					<tr>
+						<td style="font-size: 10px; padding-left: 0px" colspan="5"><b>
+								ARQUIVO </b> &nbsp; {{ aplicacaoSelecionada.arquivo }}</td>
+					</tr>
+					<tr>
+						<td style="font-size: 10px; padding-left: 0px" colspan="5"><b>LISTA
+								DE EMAILS </b></td>
+					</tr>
+					<tr ng-repeat="email in aplicacaoSelecionada.emails">
+						<td style="font-size: 10px; padding-left: 10px" colspan="5">
+							<span title="Email"> {{ email }} </span>
+						</td>
+					</tr>
+					<tr>
+						<td style="font-size: 10px; padding-left: 0px" colspan="5"><b>LISTA
+								DE TARGETS</b></td>
+					</tr>
+					<tr ng-repeat="target in aplicacaoSelecionada.target">
+						<td style="font-size: 10px; padding-left: 10px" colspan="5">
+							<div style="padding-left: 0px">
+								<span title="Target"> <b> TARGET </b>  {{
+										target.descricao }}
+								</span> <br /> <span title="Servidor de aplicação"> <b>
+										SERVIDOR DE APLICAÇÃO </b>  {{
+										target.server.descricao }} 
+								</span> <br /> <span title="String kibana"> <b> KIBANA </b>
+									&nbsp; <span style="color: #337AB7;"> {{ target.alias }}
+								</span>
+								</span> <br />
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td style="font-size: 10px; background-color: #F1F1F1" colspan="5">
+						</td>
+					</tr>
+				</table>
+			</div>
+
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+			</div>
+		</div>
+	</div>
+</div>

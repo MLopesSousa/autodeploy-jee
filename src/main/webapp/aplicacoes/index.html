@@ -1,0 +1,95 @@
+<!--  modal do novo -->
+<div ng-include='"aplicacoes/novoModal.html"'></div>
+<!-- fim do modal no novo -->
+
+<!--  modal editar -->
+<div ng-include='"aplicacoes/editar.html"'></div>
+<!-- fim modal editar -->
+
+<!--  modal editar -->
+<div ng-include='"aplicacoes/deploysModal.html"'></div>
+<!-- fim modal editar -->
+
+<!--  info editar -->
+<div ng-include='"aplicacoes/info.html"'></div>
+<!-- fim info editar -->
+
+<div style="padding-bottom: 15px">
+	<div class="input-group input-group-sm">
+		<div class="input-group-btn">
+			<button type="button" class="btn btn-default dropdown-toggle"
+				data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				Menu <span class="caret"></span>
+			</button>
+			<ul class="dropdown-menu" style="font-size: 12px">
+				<li><a href="#/deploys">Deploys</a></li>
+				<li ng-show="exibirBotao('Admin')"><a href="#/painel">Painel</a></li>
+				<li><a href="#/sas">Servidores de aplicação</a></li>
+				<li><a href="#/targets">Targets</a></li>
+			</ul>
+		</div>
+		<input type="text" class="form-control" placeholder="Procurar"
+			aria-describedby="sizing-addon1" ng-model="search">
+	</div>
+</div>
+
+<div>
+	<center>
+		<img ng-if="aplicacoes.length === 0"
+			src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+	</center>
+
+	<table ng-if="aplicacoes.length > 0" class="table table-bordered">
+		<thead>
+			<tr>
+				<th style="width: 29px;"></th>
+				<th style="width: 300px">Aplicação &nbsp; <a href=""
+					ng-show="exibirBotao('Admin')"
+					ng-click="_novo = novaAplicacao()" data-toggle="modal"
+					data-target="#NOVOMODAL" title="Nova aplicação"> <span
+						class="glyphicon glyphicon-plus-sign"> </span>
+				</a>
+				</th>
+				<th>Ambiente</th>
+				<th style="width: 400px">Arquivo</th>
+				<th>Estado</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="aplicacao in aplicacoes | filter: search | orderBy: 'descricao' ">
+				<td style="padding-right: 1px"><a href="" data-toggle="modal"
+					data-target="#INFO" ng-click="selecionaAplicacao(aplicacao)"
+					title="Detalhes da aplicação"> <span
+						class="glyphicon glyphicon-plus"> </span>
+				</a></td>
+				<td>{{ aplicacao.descricao }}</td>
+				<td>{{ aplicacao.ambiente }}</td>
+				<td>{{ aplicacao.arquivo }}</td>
+				<td ng-bind-html="aplicacao.estado | filtroEstado"></td>
+				<td>
+					<a href="" ng-click="selecionaAplicacao(aplicacao)" data-toggle="modal" data-target="#DEPLOYS" title="Histórico de deploys"> 
+						<span class="glyphicon glyphicon-list-alt"></span>
+					</a> 
+					&nbsp;
+					
+					<span ng-show="exibirBotao('Admin')">
+						<a  href="" ng-click="removeAplicacao(aplicacao.id)" title="Remover aplicação">
+							<span class="glyphicon glyphicon-trash"> </span>
+						</a> 
+						&nbsp; 
+						<a href="" ng-click="selecionaAplicacaoEditar(aplicacao)" data-toggle="modal" data-target="#EDITAR" title="Editar aplicação"> 
+							<span class="glyphicon glyphicon-edit"></span>
+						</a> 
+						&nbsp;  
+						<a href="" ng-click="clonarObjeto(aplicacao)" data-toggle="modal" data-target="#NOVOMODAL" title="Clonar aplicação"> 
+							<span class="glyphicon glyphicon-duplicate"></span>
+						</a>
+					</span>
+				</td>
+			</tr>
+
+
+		</tbody>
+	</table>
+</div>

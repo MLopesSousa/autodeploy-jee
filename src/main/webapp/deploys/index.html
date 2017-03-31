@@ -1,0 +1,77 @@
+<div style="padding-bottom: 15px">
+	<div class="input-group input-group-sm">
+		<div class="input-group-btn">
+			<button type="button" class="btn btn-default dropdown-toggle"
+				data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				Menu <span class="caret"></span>
+			</button>
+			<ul class="dropdown-menu" style="font-size: 12px">
+				<li><a href="#/aplicacoes">Aplicações</a></li>
+				<li ng-show="exibirBotao('Admin')"><a href="#/painel">Painel</a></li>
+				<li><a href="#/sas">Servidores de aplicação</a></li>
+				<li><a href="#/targets">Targets</a></li>
+			</ul>
+		</div>
+		<input type="text" class="form-control" placeholder="Procurar"
+			aria-describedby="sizing-addon1" ng-model="search">
+	</div>
+</div>
+
+<div>
+	<center>
+		<img ng-if="deploys.length === 0"
+			src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+	</center>
+
+	<table ng-if="deploys.length > 0" class="table table-bordered">
+		<thead>
+			<tr>
+				<th></th>
+				<th>Timestamp</th>
+				<th>Aplicação</th>
+				<th>Arquivo</th>
+				<th>Target</th>
+				<th>Estado</th>
+			</tr>
+		</thead>
+		<tbody
+			ng-repeat="deploy in deploys | filter: { aplicacaoDescricao: search } | filter: { id: searchId } | orderBy: '-timestamp' "
+			style="font-size: 10px">
+			<tr>
+				<td style="padding-right: 1px"><a href=""
+					ng-click="espandirLinha(deploy.id)"> <span
+						ng-hide="estaLinhaEstaEspandida(deploy.id)"
+						class="glyphicon glyphicon-plus"></span> <span
+						ng-show="estaLinhaEstaEspandida(deploy.id)"
+						class="glyphicon glyphicon-minus"></span>
+				</a></td>
+				<!-- <td>{{ deploy.timestamp | formatarData | removerAspasDuplas }} -->
+				<td>{{ deploy.timestamp | date: 'MMM d, y H:mm:ss' : '+300' }} </td>
+				</td>
+				<td> <a href="#/aplicacoes/{{ deploy.aplicacaoDescricao }}"> {{ deploy.aplicacaoDescricao }} </a></td>
+				<td>{{ deploy.arquivo }} &nbsp; <a
+					href="rs/deploys/{{ deploy.id }}/arquivo"
+					title="Download do arquivo"> <span
+						class="glyphicon glyphicon-download-alt"></span>
+				</a>
+				</td>
+				<td>{{ deploy.target.descricao }} &nbsp; &nbsp; {{
+					deploy.target.server.descricao }}</td>
+				<td ng-bind-html="deploy.estado | filtroEstado"></td>
+			</tr>
+
+			<tr ng-repeat="evento in deploy.eventos | orderBy:'id' "
+				ng-show="estaLinhaEstaEspandida(deploy.id)">
+				<td style="font-size: 8px; padding-left: 30px" colspan="6">
+					&nbsp; {{ evento.timestamp | date: 'MMM d, y H:mm:ss' : '+300' }}
+					&nbsp; <span
+					ng-bind-html="evento.descricao.toUpperCase() | verificaFalhaOuSucessoNaString">
+				</span>
+				</td>
+			</tr>
+			<tr ng-show="estaLinhaEstaEspandida(deploy.id)">
+				<td colspan="6" style="height: 50px"></td>
+			</tr>
+		</tbody>
+	</table>
+</div>

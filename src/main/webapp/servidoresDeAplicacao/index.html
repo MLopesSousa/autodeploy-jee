@@ -1,0 +1,85 @@
+<!--  modal do novo -->
+<div ng-include='"servidoresDeAplicacao/novoModal.html"'></div>
+<!-- fim do modal no novo -->
+
+<!--  modal editar -->
+<div ng-include='"servidoresDeAplicacao/editar.html"'></div>
+<!-- fim modal editar -->
+
+<!--  info editar -->
+<div ng-include='"servidoresDeAplicacao/info.html"'></div>
+<!-- fim info editar -->
+
+<div style="padding-bottom: 15px">
+	<div class="input-group input-group-sm">
+		<div class="input-group-btn">
+			<button type="button" class="btn btn-default dropdown-toggle"
+				data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				Menu <span class="caret"></span>
+			</button>
+			<ul class="dropdown-menu" style="font-size: 12px">
+				<li><a href="#/aplicacoes">Aplicações</a></li>
+				<li><a href="#/deploys">Deploys</a></li>
+				<li><a href="#/targets">Targets</a></li>
+				<li ng-show="exibirBotao('Admin')"><a href="#/painel">Painel</a></li>
+			</ul>
+		</div>
+		<input type="text" class="form-control" placeholder="Procurar"
+			aria-describedby="sizing-addon1" ng-model="search">
+	</div>
+</div>
+
+<div>
+	<center>
+		<img ng-if="sas.length === 0"
+			src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+	</center>
+
+	<table ng-if="sas.length > 0" class="table table-bordered">
+		<thead>
+			<tr>
+				<th style="width: 29px;"></th>
+				<th style="width: 300px">Servidor de aplicação &nbsp; <a href=""
+					ng-show="exibirBotao('Admin')" ng-click="_novo = criar()"
+					data-toggle="modal" data-target="#NOVOMODAL" title="Novo servidor">
+						<span class="glyphicon glyphicon-plus-sign"> </span>
+				</a>
+				</th>
+				<th style="width: 200px">Fila</th>
+				<th style="width: 200px">Host</th>
+				<th style="width: 100px">Porta</th>
+				<th style="width: 100px">Estado</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody
+			ng-repeat="server in sas | filter: search | orderBy: 'descricao' ">
+			<tr>
+				<td style="padding-right: 1px"><a href="" data-toggle="modal"
+					data-target="#INFO" ng-click="selecionaObjeto(server)"
+					title="Detalhes do servidor"> <span
+						class="glyphicon glyphicon-plus"> </span>
+				</a></td>
+				<td>{{ server.descricao }}</td>
+				<td>{{ server.fila }}</td>
+				<td>{{ server.host }}</td>
+				<td>{{ server.porta }}</td>
+				<td ng-bind-html="server.estado | filtroEstado"></td>
+				<td><a ng-show="exibirBotao('Admin')" href=""
+					ng-click="remover(server.id)" title="Remover servidor"> <span
+						class="glyphicon glyphicon-trash"> </span>
+				</a> &nbsp; <a ng-show="exibirBotao('Admin')" href=""
+					ng-click="selecionaEditar(server)" data-toggle="modal"
+					data-target="#EDITAR" title="Editar servidor"> <span
+						class="glyphicon glyphicon-edit"></span>
+				</a>&nbsp; <a ng-show="exibirBotao('Admin')" href=""
+					ng-click="clonarObjeto(server)" data-toggle="modal"
+					data-target="#NOVOMODAL" title="Clonar servidor"> <span
+						class="glyphicon glyphicon-duplicate"></span>
+				</a></td>
+			</tr>
+
+
+		</tbody>
+	</table>
+</div>

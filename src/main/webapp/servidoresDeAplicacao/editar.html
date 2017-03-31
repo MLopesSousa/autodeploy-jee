@@ -1,0 +1,82 @@
+<div class="modal fade modal-wide" id="EDITAR" tabindex="-1"
+	role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+
+				<span class="modal-title" id="myModalLabel" style="font-size: 15px">
+					Editar &nbsp;<span> <a href=""
+						ng-click="atualizar(objetoEditar)"
+						data-dismiss="modal" title="Salvar"> <span
+							class="glyphicon glyphicon-floppy-saved"> </span>
+					</a>
+					</span>
+				</span>
+			</div>
+
+			<div class="modal-body" style="font-size: 10px">
+				<div>
+					<table class="table table-striped"
+						style="margin-top: 15px; font-size: 10px">
+						<tr>
+							<td style="width: 80px"><b>Descrição</b></td>
+							<td style="width: 500px"><input type="text" style="width: 100%"
+								ng-model="objetoEditar.descricao" /></td>
+							<td></td>
+						</tr>
+						
+						<tr>
+							<td style="width: 80px"><b>Host</b></td>
+							<td style="width: 500px"><input type="text" style="width: 100%"
+								ng-model="objetoEditar.host" /></td>
+							<td></td>
+						</tr>
+						
+						<tr>
+							<td style="width: 80px"><b>Porta</b></td>
+							<td style="width: 500px"><input type="text" style="width: 100%"
+								ng-model="objetoEditar.porta" /></td>
+							<td></td>
+						</tr>
+						
+						<tr>
+							<td style="width: 80px"><b>SSH Usu�rio</b></td>
+							<td style="width: 500px"><input type="text" style="width: 100%"
+								ng-model="objetoEditar.sshUsuario" /></td>
+							<td></td>
+						</tr>
+						
+						<tr>
+							<td style="width: 80px"><b>Comando</b></td>
+							<td style="width: 500px"><input type="text" style="width: 100%"
+								ng-model="objetoEditar.comando" /></td>
+							<td></td>
+						</tr>
+						
+						<tr>
+							<td style="width: 80px"><b>Fila</b></td>
+							<td style="width: 500px"><input type="text" style="width: 100%"
+								ng-model="objetoEditar.fila" /></td>
+							<td></td>
+						</tr>
+						
+						<tr>
+							<td style="width: 80px"><b>Alias</b></td>
+							<td style="width: 500px"><input type="text" style="width: 100%"
+								ng-model="objetoEditar.alias" /></td>
+							<td></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+			</div>
+		</div>
+	</div>
+</div>

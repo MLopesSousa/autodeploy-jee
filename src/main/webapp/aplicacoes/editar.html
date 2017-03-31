@@ -1,0 +1,108 @@
+<div class="modal fade modal-wide" id="EDITAR" tabindex="-1"
+	role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+
+				<span class="modal-title" id="myModalLabel" style="font-size: 15px">
+					Editar &nbsp;<span> <a href=""
+						ng-click="atualizarAplicacao(aplicacaoEditar)"
+						data-dismiss="modal" title="Salvar"> <span
+							class="glyphicon glyphicon-floppy-saved"> </span>
+					</a>
+					</span>
+				</span>
+			</div>
+
+			<div class="modal-body" style="font-size: 10px">
+				<div>
+					<table class="table table-striped"
+						style="margin-top: 15px; font-size: 10px">
+						<tr>
+							<td style="width: 80px"><b>Descrição</b></td>
+							<td style="width: 300px"><input type="text"
+								ng-model="aplicacaoEditar.descricao" /></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td style="width: 80px"><b>Ambiente</b></td>
+							<td style="width: 300px"><input type="text"
+								ng-model="aplicacaoEditar.ambiente" /></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td><b>Arquivo</b></td>
+							<td><input type="text" ng-model="aplicacaoEditar.arquivo" />
+							</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td><b>Estado</b></td>
+							<td>
+								<a href="" title="Habilitar aplicação"
+								ng-click="aplicacaoEditar.estado = !aplicacaoEditar.estado"
+								ng-show="aplicacaoEditar.estado === false"> <span
+									class="glyphicon glyphicon-play"> </span>
+							</a> <a href="" title="Desabilitar aplicação"
+								ng-click="aplicacaoEditar.estado = !aplicacaoEditar.estado"
+								ng-show="aplicacaoEditar.estado === true"> <span
+									class="glyphicon glyphicon-pause"> </span>
+							</a>
+							</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td><b>E-mails</b></td>
+							<td>
+								<input type="text" ng-model="novoEmail" /> 
+								&nbsp; 
+								<a href="" ng-click="aplicacaoEditar.emails.push(novoEmail); novoEmail=''" title="Adicionar e-mail"> 
+									<span class="glyphicon glyphicon-plus"></span>
+								</a>
+								
+								<p ng-repeat="email in aplicacaoEditar.emails" style="padding-top: 10px; padding-left: 5px">
+									{{ email }} 
+									&nbsp; 
+									<a href="" ng-click="removerDoArray(aplicacaoEditar.emails, email)"> 
+										<span class="glyphicon glyphicon-minus"></span>
+									</a> 
+								</p>
+							</td>
+							<td>
+							</td>
+						</tr>
+						<tr>
+							<td><b>Targets</b></td>
+							<td>
+								<select>
+									<option ng-repeat="target in targets" ng-hide="verificarNoArrayPorID(aplicacaoEditar.target, target.id)"
+										ng-click="aplicacaoEditar.target.push(target)">
+										{{ target.descricao }}
+									</option>
+								</select>
+								
+								<p ng-repeat="target in aplicacaoEditar.target" style="padding-top: 10px; padding-left: 5px">
+									{{ target.descricao }} - {{ target.server.descricao }} 
+									&nbsp; 
+									<a href="" ng-click="removerNoArrayPorID(aplicacaoEditar.target, target.id)">
+										<span class="glyphicon glyphicon-minus"></span>
+									</a>
+								</p>
+							</td>
+							<td>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+			</div>
+		</div>
+	</div>
+</div>

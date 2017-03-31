@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html ng-app="AD122016">
+<head>
+<meta charset="ISO-8859-1">
+<title>AD122016 - SEFAZ CE</title>
+
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script
+	src="bower_components/jquery-ui-1.11.4.custom/jquery-ui-1.11.4.custom/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="master.css">
+<link rel="stylesheet"
+	href="bower_components/bootstrap/dist/css/bootstrap.css">
+<link rel="stylesheet"
+	href="bower_components/bootstrap/dist/css/bootstrap-theme.css">
+<link rel="stylesheet"
+	href="bower_components/jquery-ui-1.11.4.custom/jquery-ui-1.11.4.custom/jquery-ui.min.css">
+
+</head>
+<body class="container-fluid" style="font-size: 12px; font-family: sans-serif; padding-bottom: 15px" ng-controller="globalController">
+	
+	<div class="panel panel-default" >
+		<div class="panel-heading" style="height: 20x; padding: 4px 15px 4px 15px; font-size: 15px "> <b> AUTODEPLOY </b> 
+			 <a href="" title="Sair" ng-click="exit()" ng-show="exibir()"> 
+			 	<span style="float:right; font-size: 12px; padding-right: 10px; padding-top: 4px"> 
+			 		<b> {{ username }} &nbsp;  {{ roles[0] }} </b> &nbsp; <span class="glyphicon glyphicon-off"></span>  
+			 	</span> 
+			 </a>
+			</div>
+		<div class="panel-body">
+			<ng-view></ng-view>
+		</div>
+	</div>
+
+	<!-- libs -->
+	<script src="bower_components/underscorejs/underscore-min.js"></script>
+	<script src="bower_components/angular/angular.js"></script>
+	<script src="bower_components/angular-route/angular-route.min.js"></script>
+	<script src="bower_components/angular-resource/angular-resource.min.js"></script>
+	<script src="bower_components/underscorejs/underscore-min.js"></script>
+	<script src="angular-cookies.js"></script>
+
+	<script src="app.js"></script>
+	<script src="filtros.js"></script>
+	<script src="services.js"></script>
+	<script src="globalController.js"></script>
+	<script src="painel/painelController.js"></script>
+	<script src="aplicacoes/aplicacoesController.js"></script>
+	<script src="deploys/deploysController.js"></script>
+	<script src="login/loginController.js"></script>
+	<script src="targets/targetsController.js"></script>
+	<script src="servidoresDeAplicacao/sasController.js"></script>
+	<script src="dao.js"></script>
+	<script src="filtros.js"></script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<div style="padding-bottom: 15px">
+	<div class="input-group input-group-sm">
+		<div class="input-group-btn">
+			<button type="button" class="btn btn-default dropdown-toggle"
+				data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				Menu <span class="caret"></span>
+			</button>
+			<ul class="dropdown-menu" style="font-size: 12px">
+				<li><a href="#/aplicacoes">Aplicações</a></li>
+				<li><a href="#/deploys">Deploys</a></li>
+				<li><a href="#/sas">Servidores de aplicação</a></li>
+				<li><a href="#/targets">Targets</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<div>
+	<table class="table table-bordered">
+		<thead>
+			<tr>
+				<th style="width: 37px; padding-left: 11px"><span
+					class="glyphicon glyphicon-cog"></span></th>
+				<th style="width: 300px">CONFIGURAÇÕES</th>
+				<th style="width: 400px">VALOR</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="(chave, valor) in configuracoes ">
+				<td></td>
+				<td>{{ chave }}</td>
+				<td><a ng-show="eBoolean(valor)" href=""
+					ng-click="alterarValorDaPropriedade(chave, !valor)"
+					title="Alterar o valor"> 
+						<span ng-show="!valor" class="glyphicon glyphicon-play"> </span> 
+						<span ng-show="valor" class="glyphicon glyphicon-pause"> </span>
+					</a> <class ng-hide="eBoolean(valor)" title="Alterar o valor"> {{ valor }} </class></td>
+
+				<td ng-show="eBoolean(valor)"></td>
+				<td ng-hide="eBoolean(valor)"><input type="text"
+					ng-model="valor" /> &nbsp; <a href=""
+					ng-click="alterarValorDaPropriedadeString(chave, valor)"> <span
+						class="glyphicon glyphicon-floppy-saved"></span>
+				</a></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<table class="table table-bordered">
+		<thead>
+			<tr>
+				<th style="width: 37px; padding-left: 11px"><span
+					class="glyphicon glyphicon-cog"></span></th>
+				<th style="width: 300px">ENTIDADE</th>
+				<th style="width: 400px">QUANTIDADE</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td></td>
+				<td>Número de deploys efetuados </td>
+				<td>{{ deploys.length }}</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>Número de aplicações cadastradas</td>
+				<td>{{ aplicacoes.length }}</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>Número de targets cadastrados</td>
+				<td>{{ targets.length }}</td>
+				<td></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<table class="table table-bordered">
+		<thead>
+			<tr>
+				<th style="width: 37px; padding-left: 11px"><span
+					class="glyphicon glyphicon-cog"></span></th>
+				<th style="width: 300px">LISTA DE FILAS</th>
+				<th style="width: 400px">QUANTIDADE DE MENSAGENS</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="(chave, valor) in filas">
+				<td></td>
+				<td>{{ chave }}</td>
+				<td title="Quantidade de mensagem na fila">{{ valor }}</td>
+				<td></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
